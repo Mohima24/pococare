@@ -1,12 +1,15 @@
 const mongoose = require("mongoose");
-const appointmentSchema = new mongoose.Schema(
+
+const appointmentSchema = mongoose.Schema(
   {
     userId: {
-      type: { type: mongoose.Schema.Types.ObjectId, ref: 'Users' },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
       required: true,
     },
     doctorId: {
-      type: { type: mongoose.Schema.Types.ObjectId, ref: 'Doctors' },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Doctor',
       required: true,
     },
     doctorInfo: {
@@ -17,7 +20,7 @@ const appointmentSchema = new mongoose.Schema(
       type: Object,
       required: true,
     },
-    slotTimmings: {
+    slotTimming: {
       type: String,
       required: true,
     },
@@ -28,10 +31,10 @@ const appointmentSchema = new mongoose.Schema(
     }
   },
   {
-    timestamps: true,
+    versionKey: false,
+    timestamps: true
   }
 );
 
-
-const appointmentModel = mongoose.model("appointmenst", appointmentSchema);
-module.exports = appointmentModel;
+const AppointmentModel = mongoose.model("appointment", appointmentSchema);
+module.exports = { AppointmentModel };

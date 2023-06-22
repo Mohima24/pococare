@@ -10,7 +10,7 @@ const Authorized = (role)=>{
 
         }else{
 
-            res.send({status:"FAILED","msg":"You are not authorised"});
+            res.status(401).send({status:"FAILED","msg":"You are not authorised"});
 
         }
     }
