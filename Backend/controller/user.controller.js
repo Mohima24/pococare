@@ -1,5 +1,6 @@
 const { Usermodel } = require("../model/user.model");
 const { UserOTPVerification } = require("../model/otp.model");
+const { DoctorModel } = require("../model/doctor.model");
 const bcrypt = require("bcrypt");
 const nodemailer= require("nodemailer");
 const jwt = require("jsonwebtoken");
@@ -17,7 +18,7 @@ const transporter = nodemailer.createTransport({
 })
 
 exports.signupemail = async (req, res) => {
-    const { firstName, lastName,mobile, password, email ,role } = req.body;
+    const { firstName, lastName,mobile, password, email ,role,specialization,experience,feePerCunsultation } = req.body;
 
     if (password == "") {
         return res.json({ status: "FAILED", "messege": "Empty Password" })
@@ -36,13 +37,35 @@ exports.signupemail = async (req, res) => {
                 if(err){
                     res.send("bcrypt err")
                 }else{
-                    const user = new Usermodel({
-                      firstName, lastName, email, password:hash ,role,mobile
-                    })
-                    user.save()
-                    .then((result)=>{
-                        sendOTPVErificationEmail(result,res)
-                    })
+                  if(role=="Doctor"){
+
+                      const user = new Usermodel({
+                        firstName, lastName, email, password:hash ,role,mobile
+                      })
+                      let name= firstName+" "+lastName
+                      const doctor = new DoctorModel({
+                        userId:user._id,name,email,mobile,password:hash,specialization,feePerCunsultation,experience,timings:[]
+                      })
+                      doctor.save().then((result)=>{
+                        
+                        user.save().then((userresult)=>{
+                          sendOTPVErificationEmail(userresult,res)
+                        })
+                        }).catch((err)=>{
+                          console.log(err)
+                      })
+
+                    }else{
+
+                      const user = new Usermodel({
+                        firstName, lastName, email, password:hash ,role,mobile
+                      })
+
+                      user.save().then((userresult)=>{
+                        sendOTPVErificationEmail(userresult,res)
+                      })
+                      
+                    }
                 }
             })
         }
@@ -130,12 +153,14 @@ async function sendOTPVErificationEmail({_id,email},res){
             const hashpass= findeuser.password;
     
             bcrypt.compare(password, hashpass, async(err, result) => {
+
               if(result){
-                const access_token = jwt.sign({userID:findeuser._id},process.env.userkey,{expiresIn:"7d"})    
+                const access_token = jwt.sign({userID:findeuser._id,userRole:findeuser.role},process.env.userkey,{expiresIn:"7d"})    
                 res.send({status:"OK",message:"login successfully",access_token,findeuser})
               }else{
                 res.send({status:"FAILED",message:"Wrong credentials"})
               }
+
             })
           }else{
             res.send({status:"FAILED",message:"Wrong credentials"})
@@ -173,10 +198,16 @@ async function sendOTPVErificationEmail({_id,email},res){
                     res.status(500).send({status:"FAILED",message:"Code has been expired"})
 
                 }else{
+                  const doctor = DoctorModel.findOne({userId:userID})
                   bcrypt.compare(otp, sendotp, async(err, result) => {
                       if(!result){
                           await Usermodel.updateOne({_id:userID},{verify:true})
                           await UserOTPVerification.deleteMany({userID})
+                          if(doctor){
+
+                            await DoctorModel.updateOne({userId:userID},{verify:true});
+
+                          }
                           res.json({
                               status:"VERIFIED",
                               "message":"user has verified"

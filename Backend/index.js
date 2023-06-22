@@ -1,6 +1,7 @@
 const express = require("express");
 const {connection}= require("./config/db");
-const {userRouter} = require('./router/user.router')
+const {UserRouter} = require('./router/user.router');
+const { AppontmentRouter } = require("./router/appointment.router");
 let cors= require("cors");
 require("dotenv").config();
 
@@ -8,7 +9,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use('/user',userRouter)
+app.use('/user',UserRouter)
+app.use("/booking",AppontmentRouter)
 
 app.get("/",(req,res)=>{
     res.send("Home page");
