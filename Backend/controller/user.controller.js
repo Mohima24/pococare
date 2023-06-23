@@ -113,38 +113,39 @@ async function sendOTPVErificationEmail({_id,email},res){
     }
   }
 
-  exports.resendOTPemail = async(req,res)=>{
-    let {userID,email}=req.body;
-      try{
-        if(userID==""|| email==""){
-          throw Error("Empty user details")
-        }else{
-  
-          const finduser = await Usermodel.find({ email , _id:userID})
-          if(finduser.length>0){
-            await UserOTPVerification.deleteMany({userID})
-            sendOTPVErificationEmail({_id:userID,email},res)
-          }else{
-            throw Error("please give correct details")
-          }
-    
-        }
-      }
-      catch(err){
-        console.log(err)
-        throw Error("sending resend otp mail")
-      }
-    }
+exports.resendOTPemail = async(req,res)=>{
+let {userID,email}=req.body;
+  try{
+    if(userID==""|| email==""){
+      throw Error("Empty user details")
+    }else{
 
-    exports.emaillogin = async (req, res) => {
+      const finduser = await Usermodel.find({ email , _id:userID})
+      if(finduser.length>0){
+        await UserOTPVerification.deleteMany({userID})
+        sendOTPVErificationEmail({_id:userID,email},res)
+      }else{
+        throw Error("please give correct details")
+      }
+
+    }
+  }
+  catch(err){
+    console.log(err)
+    throw Error("sending resend otp mail")
+  }
+}
+
+exports.emaillogin = async (req, res) => {
 
       try{
         const { email, password } = req.body;
         if(email){
   
           const findeuser = await Usermodel.findOne({ email })
-          
+
           if(findeuser.verify==false){
+            console.log('hello')
               res.send({status:"FAILED",message:"Wrong credentials"})
               return 
           }
@@ -153,7 +154,7 @@ async function sendOTPVErificationEmail({_id,email},res){
             const hashpass= findeuser.password;
     
             bcrypt.compare(password, hashpass, async(err, result) => {
-
+              
               if(result){
                 const access_token = jwt.sign({userID:findeuser._id,userRole:findeuser.role},process.env.userkey,{expiresIn:"7d"})    
                 res.send({status:"OK",message:"login successfully",access_token,findeuser})
@@ -225,5 +226,25 @@ async function sendOTPVErificationEmail({_id,email},res){
         res.send({"err":"While verify",message:err.message})
         console.log()
     }
+
+}
+
+exports.getAllDoctorDetails = async(req,res) => {
+  const doctors = await DoctorModel.find();
+  
+  res.send({
+      status:"OK",
+      data:doctors
+  })
+  
+}
+
+exports.signleDoctor = async(req,res) => {
+  const {doctorID} = req.params;
+  const doctor = await DoctorModel.findById({_id:doctorID})
+  res.send({
+    status:"OK",
+    data:doctor
+  })
 
 }
