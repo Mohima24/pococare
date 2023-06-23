@@ -6,8 +6,18 @@
 
 ---
 
- ## What is BellsNRibbons
+ ## What is Pococare
  - An online doctor slot booking app
+---
+   Doctor congif: {
+   "email":"amitbahadur38177@gmail.com",
+   "password":"amit"
+   }
+ ---
+ Patient config: {
+ "email":"mohimabahadur@gmail.com"
+ "password":"mohima"
+ }   
  ---
  <br/>
 
