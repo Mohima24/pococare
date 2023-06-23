@@ -43,23 +43,19 @@ document.getElementById('btn').addEventListener('click',async(e)=>{
     e.preventDefault()
     let userID = userDetails.userID;
     let otp = inputs[0].value+""+inputs[1].value+""+inputs[2].value+""+inputs[3].value;
-    otp=+otp
-
+    otp=+otp;
 
      try{
-       let register_rqst = await fetch("http://localhost:3030/user/verifyotp",{
-           method:"POST",
-           headers:{
-               "Content-Type":"application/json"
-           },
-           body:JSON.stringify({otp , userID:userID})
-       })
-       const data = await register_rqst.json()
-       if(data.status=="VERIFIED"){
+        const response = await axios.post('https://delightful-bull-sweatsuit.cyclic.app/user/verifyotp', {otp , userID:userID}, {
+          headers:{
+              "Content-Type":"application/json"
+          },
+        });
+       if(response.data.status=="VERIFIED"){
          alert("You are verified now")
          window.location.assign("signin.html")
        }else{
-           alert("Please try again")
+           alert(response.data.message)
        }
    }
    catch(err){
@@ -106,21 +102,19 @@ resentButton.addEventListener('click',(e)=>{
 async function resenOTPwithemail({useremail,userID}){
  console.log(useremail,userID)
    try{
-     let register_rqst = await fetch("http://localhost:3030/user/resendOTP",{
-         method:"POST",
-         headers:{
-             "Content-Type":"application/json"
-         },
-         body:JSON.stringify({email:useremail , userID:userID})
-     })
-     const data = await register_rqst.json()
-     if(data.status=="PENDING"){
+
+    const response = await axios.post('https://delightful-bull-sweatsuit.cyclic.app/user/resendOTP', {email:useremail , userID:userID}, {
+      headers:{
+          "Content-Type":"application/json"
+      },
+    });
+     if(response.data.status=="PENDING"){
        alert("OTP has send")
        setTimeout(()=>{
         window.location.reload()
        },2000)
      }else{
-         alert("Please try again")
+         alert(response.data.message)
      }
  }
  catch(err){

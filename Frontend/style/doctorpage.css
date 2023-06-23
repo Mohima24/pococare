@@ -6,6 +6,18 @@ h1,h2,h3,h4,h5,h6,a,p{
     margin: 0;
     padding: 0;
 }
+nav{
+    padding: 1rem 0;
+    background-color: #7da8ff;
+    font-size:1.1rem;
+    text-align: center;
+}
+nav a{
+    color: white;
+}
+h1{
+    margin: 2rem 0;
+}
 .container{
     width: 90%;
     margin: auto;

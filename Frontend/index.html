@@ -4,31 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style/doctorpage.css">
+    <link
+    href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600&family=Libre+Franklin:wght@500&display=swap"
+    rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <input type="datetime-local" id="myDatetimeInput">
-    <button onclick="getValue()">Get Value</button>
+    <nav>
+        <a href="signin.html">Signin</a>
+    </nav>
+    <div class="container">
+        <h1>
+            Doctor Details
+        </h1>
+        <div id="doctorContainer">
+            <!-- append -->
+        </div>
+
+    </div>
+    
+    
 </body>
 </html>
-<script>
-function getValue() {
-
-  var input = document.getElementById('myDatetimeInput');
-  var datetimeValue = input.value;
-  console.log(input.value)
-  // Create a new Date object using the datetimeValue
-  var datetime = new Date(datetimeValue);
-//   console.log(datetime)
-//   console.log(datetime.getDate())
-//   console.log(datetime.getFullYear())
-//   console.log(datetime.getMonth())
-
-  // Format the date and time as string with AM/PM indication
-  var formattedDatetime = datetime.toLocaleString(undefined, { hour: 'numeric', minute: 'numeric', hour12: true });
-  let x =new Date()
-  console.log(x)
-  // Display the formatted datetime
-  console.log(formattedDatetime);
-}
-
-</script>
+<script src="script/doctorDetails.js"></script>

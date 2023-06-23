@@ -1,7 +1,7 @@
 const express = require("express");
 const {connection}= require("./config/db");
-const {UserRouter} = require('./router/user.router');
-const { AppontmentRouter } = require("./router/appointment.router");
+const {UserRouter} = require('./router/userrouter');
+const { AppontmentRouter } = require("./router/appointmentrouter");
 let cors= require("cors");
 require("dotenv").config();
 

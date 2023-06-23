@@ -2,10 +2,9 @@ const doctorContainer = document.getElementById('doctorContainer')
 
 const render = async () => {
     try {
-        let fetchd = await fetch('http://localhost:3030/user/doctor')
-        let data = await fetchd.json()
-        console.log(data)
-        reducefun(data.data)
+        let response = await axios.get('https://delightful-bull-sweatsuit.cyclic.app/user/doctorlist')
+        
+        reducefun(response.data.data)
     }
     catch (err) {
         console.log(err)

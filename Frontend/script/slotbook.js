@@ -4,24 +4,23 @@ const access_token = localStorage.getItem('access_token')
 let slots=[]
 async function slotDetails(){
     try {
-        let fetchd = await fetch(`http://localhost:3030/booking/available-slot/${doctorID}`)
-        let data = await fetchd.json()
-        if(data.status=="OK"){
-            slots = data.data;
+        let response = await axios.get(`https://delightful-bull-sweatsuit.cyclic.app/booking/available-slot/${doctorID}`)
+        if(response.data.status=="OK"){
+            slots = response.data.data[0].timings;
         }
     }
     catch (err) {
         console.log(err)
+        slots=[]
     }
 }
 slotDetails()
 userDetails()
 async function userDetails(){
     try {
-        let fetchd = await fetch(`http://localhost:3030/user/signleDoctor/${doctorID}`)
-        let data = await fetchd.json()
-        if(data.status=="OK"){
-            renderDetails(data.data,slots)
+        let response = await axios.get(`https://delightful-bull-sweatsuit.cyclic.app/user/signleDoctor/${doctorID}`)
+        if(response.data.status=="OK"){
+            renderDetails(response.data.data,slots)
         }
     }
     catch (err) {
@@ -30,7 +29,6 @@ async function userDetails(){
 }
 
 function renderDetails(el,slots){
-    console.log(slots)
     doctorContainer.innerHTML=`
     <div class="doctorCard">
             <div><img src="Image/doctorpng.png" alt=""></div>
@@ -40,16 +38,18 @@ function renderDetails(el,slots){
                 <p>specialization: ${el.specialization}</p>
                 <p>Fees: ${el.feePerCunsultation}</p>
                 <div>
-                    <select>
-                    ${slots.map((ele)=>{
-                        abc = new Date(ele.time)
-                        const date = abc.getDate()
-                        const year = abc.getFullYear()
-                        const month= abc.getMonth()
-                        const time = abc.toLocaleString(undefined, { hour: 'numeric', minute: 'numeric', hour12: true })
-                        return `<option value=${ele.time}>${time} ${date}-${year}-${month}</option>`
-                    })}
-                    </select>
+                ${slots.length>0?`
+                <select>
+                ${slots.map((ele)=>{
+                    abc = new Date(ele.time)
+                    const date = abc.getDate()
+                    const year = abc.getFullYear()
+                    const month= abc.getMonth()
+                    const time = abc.toLocaleString(undefined, { hour: 'numeric', minute: 'numeric', hour12: true })
+                    return `<option value=${ele.time}>${time} ${date}-${year}-${month}</option>`
+                })}
+                </select>
+                `:`<p>No Slot available</p>`}
                     <button data-id=${el._id}>Book Slots</button>
                 </div>
             </div>
@@ -61,28 +61,28 @@ function renderDetails(el,slots){
 
     bookingButton.addEventListener('click',async(e)=>{
         const ID = e.target.dataset.id;
+        if(!access_token){
+            alert("Please Log-in first")
+            return
+        }
         const obj={
             "doctorId":doctorID,
             "slotTimming":timevalue.value
         }
         try{
-            console.log(obj)
-            let fetchd = await fetch(`http://localhost:3030/booking/book-slot`,{
-                method:"POST",
+            let response = await axios.post(`https://delightful-bull-sweatsuit.cyclic.app/booking/book-slot`,obj,{
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `${access_token}`,
                 },
-                body:JSON.stringify(obj)
             })
-            let res = await fetchd.json(obj)
-            if(res.status=="OK"){
+            if(response.data.status=="OK"){
                 alert("Successfully booked")
             }else{
-                alert(res.message)
+                alert(response.data.message)
             }
         }catch(err){
-            alert(err.message)
+            alert(err)
         }
     })
 }

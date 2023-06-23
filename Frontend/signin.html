@@ -10,12 +10,14 @@
     <link
         href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600&family=Libre+Franklin:wght@500&display=swap"
         rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 
 <body>
     <div id="signupcontainer">
         <div>
-            <h3>SIGN IN WITH EMAIL</h3>
+            <h3>SIGN IN FOR PATEINT</h3>
             <form id="register1">
                 <div>
                     <label>Email</label>
@@ -24,6 +26,21 @@
                 <div>
                     <label>Password</label>
                     <input type="password" id="pass1" required>
+                </div>
+                <div><input type="submit"></div>
+            </form>
+            <p>Dont't Have Any Account? <a href="signup.html">Sign up</a></p>
+        </div>
+        <div>
+            <h3>SIGN IN FOR DOCTOR</h3>
+            <form id="register2">
+                <div>
+                    <label>Email</label>
+                    <input type="email" id="email2">
+                </div>
+                <div>
+                    <label>Password</label>
+                    <input type="password" id="pass2" required>
                 </div>
                 <div><input type="submit"></div>
             </form>

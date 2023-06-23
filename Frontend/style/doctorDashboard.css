@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@500&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+h1,h2,h3,h4,h5,h6,a{
+    font-family: 'League Spartan', sans-serif;
+}
+
+h1{
+    text-align: center;
+    margin: 2rem 0;
+}
+.container{
+    width: 90%;
+    margin:auto;
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+}
+.container>div:nth-child(1){
+    width: 70%;
+}
+.container>div:nth-child(1)>h2{
+    margin: 1.2rem auto;
+}
+#showSlotDetails{
+    width: 100%;
+    display: flex;
+    text-align: center;
+    align-content: center;
+    justify-content: start;
+    gap:10px;
+}
+#showSlotDetails>div{
+    width: 28%;
+    height: 100px;
+    padding: 1rem;
+    text-align: center;
+    border: 2px solid black;
+}
+#createSlot{
+    width: 20%;
+    border: 2px solid black;
+    text-align: center;
+    padding: 1.5rem;
+    margin: 3.9rem 0;
+}
+#createSlot div{
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+button{
+    background-color: #8fb4ff;
+    border: none;
+    margin-top:1rem;
+    padding: 7px 0;
+    cursor: pointer;
+    border-radius: 5px;
+}

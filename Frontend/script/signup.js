@@ -11,18 +11,17 @@ form1.addEventListener("submit",async(e)=>{
             mobile:phone1.value,
             password:pass1.value
         }
-        let register_rqst = await fetch("http://localhost:3030/user/signup",{
-            method:"POST",
+        const response = await axios.post('https://delightful-bull-sweatsuit.cyclic.app/user/signup', userobj, {
             headers:{
                 "Content-Type":"application/json"
             },
-            body:JSON.stringify(userobj)
-        })
-        const data = await register_rqst.json()
-        if(data.status=="PENDING"){
-            const userDetails = {userID:data.data.userID,email:data.data.email}
+        });
+
+        if(response.data.status=="PENDING"){
+            const userDetails = {userID:response.data.data.userID,email:response.data.data.email}
             localStorage.setItem('userDetails',JSON.stringify(userDetails))
             window.location.assign("verifyOtp.html")
+            
         }else{
             alert("Please try again")
         }
@@ -46,16 +45,13 @@ form2.addEventListener("submit",async(e)=>{
             feePerCunsultation:fees.value,
             role:"Doctor"
         }
-        let register_rqst = await fetch("http://localhost:3030/user/signup",{
-            method:"POST",
+        const response = await axios.post('https://delightful-bull-sweatsuit.cyclic.app/user/signup', userobj, {
             headers:{
                 "Content-Type":"application/json"
             },
-            body:JSON.stringify(userobj)
-        })
-        const data = await register_rqst.json()
-        if(data.status=="PENDING"){
-            const userDetails = {userID:data.data.userID,email:data.data.email}
+        });
+        if(response.data.status=="PENDING"){
+            const userDetails = {userID:response.data.data.userID,email:response.data.data.email}
             localStorage.setItem('userDetails',JSON.stringify(userDetails))
             window.location.assign("verifyOtp.html")
         }else{

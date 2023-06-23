@@ -1,4 +1,4 @@
-const Authorized = (role)=>{
+const authorized = (role)=>{
 
     return (req,res,next)=>{
 
@@ -18,4 +18,4 @@ const Authorized = (role)=>{
 }
 
 
-module.exports = {Authorized};
+module.exports = {authorized};

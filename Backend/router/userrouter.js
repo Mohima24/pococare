@@ -12,4 +12,5 @@ UserRouter.get("/signleDoctor/:doctorID",userontroller.signleDoctor)
 module.exports={
     
     UserRouter
+    
 }

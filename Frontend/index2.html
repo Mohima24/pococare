@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="datetime-local" id="myDatetimeInput">
+    <button onclick="getValue()">Get Value</button>
+</body>
+</html>
+<script>
+function getValue() {
+
+  var input = document.getElementById('myDatetimeInput');
+  var datetimeValue = input.value;
+  console.log(input.value)
+  // Create a new Date object using the datetimeValue
+  var datetime = new Date(datetimeValue);
+//   console.log(datetime)
+//   console.log(datetime.getDate())
+//   console.log(datetime.getFullYear())
+//   console.log(datetime.getMonth())
+
+  // Format the date and time as string with AM/PM indication
+  var formattedDatetime = datetime.toLocaleString(undefined, { hour: 'numeric', minute: 'numeric', hour12: true });
+  let x =new Date()
+  console.log(x)
+  // Display the formatted datetime
+  console.log(formattedDatetime);
+}
+
+</script>

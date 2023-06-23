@@ -230,7 +230,7 @@ exports.emaillogin = async (req, res) => {
 }
 
 exports.getAllDoctorDetails = async(req,res) => {
-  const doctors = await DoctorModel.find();
+  const doctors = await DoctorModel.find({});
   
   res.send({
       status:"OK",

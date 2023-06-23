@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link
+    href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600&family=Libre+Franklin:wght@500&display=swap"
+    rel="stylesheet">
+    <link rel="stylesheet" href="style/doctorDashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h1>
+        My Profile
+    </h1>
+    <div class="container">
+        <div>
+            <h2>Slot Details</h2>
+            <div id="showSlotDetails">
+                <!-- append -->
+            </div>
+        </div>
+        <div id="createSlot">
+            <h2>Create slot</h2>
+            <div>
+                <input type="datetime-local" id="myDatetimeInput">
+                <button onclick="getValue()">Get Value</button>
+            </div>
+        </div>        
+    </div>
+</body>
+</html>
+<script src="./script/doctordashboard.js"></script>

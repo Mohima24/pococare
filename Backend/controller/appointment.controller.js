@@ -2,6 +2,7 @@ const { Usermodel } = require("../model/user.model");
 const nodemailer= require("nodemailer");
 const { DoctorModel } = require("../model/doctor.model");
 const { AppointmentModel } = require("../model/appointment.model");
+const mongoose = require('mongoose')
 require("dotenv").config();
 
 
@@ -90,8 +91,9 @@ exports.bookingoute = async(req,res)=>{
 
 exports.getlotsDetailsforDoctor = async(req,res)=>{
     const { userID } = req.body;
+
     try{
-        const slotDetails = await DoctorModel.findById({userId:userID})
+        const slotDetails = await DoctorModel.find({userId:userID})
 
         res.send({
             status:"OK",
@@ -99,31 +101,42 @@ exports.getlotsDetailsforDoctor = async(req,res)=>{
         })
 
     }catch(err){
+        console.log(err)
         res.send(err)
     }
 }
 exports.getavailableslot = async(req,res)=>{
-    const {doctorId} = req.params;
-    const availableSlot = await DoctorModel.findOne(
-        {
-            "_id": doctorId,
-            "timings.status": false
-        },
-        {
-            "timings.$": 1
+    try{
+        const {doctorId} = req.params;
+        const availableSlots = await DoctorModel.aggregate([
+            { $match: { _id:new mongoose.Types.ObjectId(doctorId) } },
+            {
+              $project: {
+                timings: {
+                  $filter: {
+                    input: "$timings",
+                    as: "timing",
+                    cond: { $eq: ["$$timing.status", false] }
+                  }
+                }
+              }
+            }
+          ])
+          
+        if(availableSlots){
+            return res.send({
+                status:"OK",
+                data:availableSlots
+            })
         }
-    )
-    console.log(availableSlot)
-    if(availableSlot){
-        return res.send({
-            status:"OK",
-            data:availableSlot.timings
+        
+        res.status(404).send({
+            status:"FAILED",
+            "message":"No Data Found"
         })
+    }catch(err){
+        console.log(err)
     }
-    res.status(404).send({
-        status:"FAILED",
-        "message":"No Data Found"
-    })
 }
 
 
