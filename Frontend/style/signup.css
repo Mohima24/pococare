@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@500&display=swap');
+h1,h2,h3,h4,h5,h6,a{
+    font-family: 'League Spartan', sans-serif;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#signupcontainer{
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    height: 110vh;
+    background-color: rgb(235,241,255);
+    padding:2% 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;    
+}
+
+#signupcontainer>div{
+    width: 25%;
+    height: auto;
+    background-color: white;
+    margin: auto;
+    padding:4% 2%;
+}
+#signupcontainer>div>h3{
+    text-align: center;
+    color: black;
+}
+#register1,#register2{
+    margin-top: 5%;
+}
+#register1>div,#register2>div{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-family: 'League Spartan', sans-serif;
+} 
+#register1>div>input[type="text"],
+#register1>div>input[type="number"],
+#register1>div>input[type="email"],
+#register1>div>input[type="password"],
+#register2>div>input[type="text"],
+#register2>div>input[type="number"],
+#register2>div>input[type="email"],
+#register2>div>input[type="password"]
+{
+    padding: 8px 0px;
+    margin: 2px 0px;
+    margin-bottom: 14px;
+}
+input[type="submit"]{
+    width: 30%;
+    margin: auto;
+    padding: 7px 10px;
+    background-color: rgb(143,180,255);
+    color: white;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 14px;
+}
+#signupcontainer .twoinputbox{
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#signupcontainer .twoinputbox div{
+    width: 43%;
+    display: flex;
+    flex-direction: column;
+}
+
+.twoinputbox div>input[type="text"],
+.twoinputbox div>input[type="datetime-local"]
+{
+    padding: 8px 0px;
+    margin: 2px 0px;
+    margin-bottom: 14px;
+}

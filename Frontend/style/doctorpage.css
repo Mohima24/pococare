@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@500&display=swap');
+h1,h2,h3,h4,h5,h6,a,p{
+    font-family: 'League Spartan', sans-serif;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+.container{
+    width: 90%;
+    margin: auto;
+    text-align: center;
+}
+#doctorContainer{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.doctorCard{
+    width: 20%;
+    padding: 2rem 0;
+    border: 2px solid black;
+}
+.doctorCard img{
+    width: 20%;
+    border-radius: 50%;
+}
+.doctorCard h2{
+    padding:1rem 2rem;
+}
+.doctorCard p{
+    padding: 3px;
+}
+.doctorCard button{
+    margin-top: 1.5rem;
+    background-color: #8fb4ff;
+    border-radius: 5px;
+    padding: 4px 7px;
+    border: 2px solid black;
+}
