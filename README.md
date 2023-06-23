@@ -1,7 +1,7 @@
 # Doctor Booking Application
 
 
-- Deployed Webite = https://easy-erin-buffalo-cape.cyclic.app/
+- Deployed Webite = https://delightful-bull-sweatsuit.cyclic.app
 - Deployed Backend = https://6494e9dab8d76a19ce6043c2--brilliant-crepe-ae5b48.netlify.app/
 
 ---
