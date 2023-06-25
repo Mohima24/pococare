@@ -8,15 +8,19 @@
  ## What is Pococare
  - An online doctor slot booking app
 ---
+```
    Doctor congif: {
    "email":"amitbahadur38177@gmail.com",
    "password":"amit"
    }
+ ```  
  ---
+ ```
  Patient config: {
  "email":"mohimabahadur@gmail.com"
  "password":"mohima"
- }   
+ } 
+ ```  
  ---
  <br/>
 
@@ -27,6 +31,7 @@
  - Doctor can create slot
  - Pateint can Book the slot
  - Pateint will get notified in their email after booking
+ - Video callign added
 ---
 <br/>
 
