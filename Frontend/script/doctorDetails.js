@@ -2,7 +2,7 @@ const doctorContainer = document.getElementById('doctorContainer')
 
 const render = async () => {
     try {
-        let response = await axios.get('https://delightful-bull-sweatsuit.cyclic.app/user/doctorlist')
+        let response = await axios.get('https://online-doctor-booking-app.onrender.com/user/doctorlist')
         
         reducefun(response.data.data)
     }

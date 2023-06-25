@@ -11,7 +11,7 @@ form1.addEventListener("submit",async(e)=>{
             mobile:phone1.value,
             password:pass1.value
         }
-        const response = await axios.post('https://delightful-bull-sweatsuit.cyclic.app/user/signup', userobj, {
+        const response = await axios.post('https://online-doctor-booking-app.onrender.com/user/signup', userobj, {
             headers:{
                 "Content-Type":"application/json"
             },
@@ -45,7 +45,7 @@ form2.addEventListener("submit",async(e)=>{
             feePerCunsultation:fees.value,
             role:"Doctor"
         }
-        const response = await axios.post('https://delightful-bull-sweatsuit.cyclic.app/user/signup', userobj, {
+        const response = await axios.post('https://online-doctor-booking-app.onrender.com/user/signup', userobj, {
             headers:{
                 "Content-Type":"application/json"
             },

@@ -46,7 +46,7 @@ document.getElementById('btn').addEventListener('click',async(e)=>{
     otp=+otp;
 
      try{
-        const response = await axios.post('https://delightful-bull-sweatsuit.cyclic.app/user/verifyotp', {otp , userID:userID}, {
+        const response = await axios.post('https://online-doctor-booking-app.onrender.com/user/verifyotp', {otp , userID:userID}, {
           headers:{
               "Content-Type":"application/json"
           },
@@ -103,7 +103,7 @@ async function resenOTPwithemail({useremail,userID}){
  console.log(useremail,userID)
    try{
 
-    const response = await axios.post('https://delightful-bull-sweatsuit.cyclic.app/user/resendOTP', {email:useremail , userID:userID}, {
+    const response = await axios.post('https://online-doctor-booking-app.onrender.com/user/resendOTP', {email:useremail , userID:userID}, {
       headers:{
           "Content-Type":"application/json"
       },

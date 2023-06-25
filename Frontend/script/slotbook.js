@@ -4,7 +4,7 @@ const access_token = localStorage.getItem('access_token')
 let slots=[]
 async function slotDetails(){
     try {
-        let response = await axios.get(`https://delightful-bull-sweatsuit.cyclic.app/booking/available-slot/${doctorID}`)
+        let response = await axios.get(`https://online-doctor-booking-app.onrender.com/booking/available-slot/${doctorID}`)
         if(response.data.status=="OK"){
             slots = response.data.data[0].timings;
         }
@@ -18,7 +18,7 @@ slotDetails()
 userDetails()
 async function userDetails(){
     try {
-        let response = await axios.get(`https://delightful-bull-sweatsuit.cyclic.app/user/signleDoctor/${doctorID}`)
+        let response = await axios.get(`https://online-doctor-booking-app.onrender.com/user/signleDoctor/${doctorID}`)
         if(response.data.status=="OK"){
             renderDetails(response.data.data,slots)
         }
@@ -70,7 +70,7 @@ function renderDetails(el,slots){
             "slotTimming":timevalue.value
         }
         try{
-            let response = await axios.post(`https://delightful-bull-sweatsuit.cyclic.app/booking/book-slot`,obj,{
+            let response = await axios.post(`https://online-doctor-booking-app.onrender.com/booking/book-slot`,obj,{
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `${access_token}`,

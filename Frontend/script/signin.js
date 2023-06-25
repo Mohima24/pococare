@@ -10,7 +10,7 @@ form1.addEventListener("submit",async(e)=>{
             password:pass1.value,
         }
 
-        const response = await axios.post('https://delightful-bull-sweatsuit.cyclic.app/user/login', userobj, {
+        const response = await axios.post('https://online-doctor-booking-app.onrender.com/user/login', userobj, {
             headers:{
                 "Content-Type":"application/json"
             },
@@ -43,7 +43,7 @@ form2.addEventListener("submit",async(e)=>{
             password:pass2.value,
         }
 
-        const response = await axios.post('https://delightful-bull-sweatsuit.cyclic.app/user/login', userobj, {
+        const response = await axios.post('https://online-doctor-booking-app.onrender.com/user/login', userobj, {
             headers:{
                 "Content-Type":"application/json"
             },

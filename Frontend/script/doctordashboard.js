@@ -15,7 +15,7 @@ async function getValue(){
     console.log(input.value)
     try
     {
-        const response = await axios.patch('https://delightful-bull-sweatsuit.cyclic.app/booking/create-slot',{slotTimming:input.value,},
+        const response = await axios.patch('https://online-doctor-booking-app.onrender.com/booking/create-slot',{slotTimming:input.value,},
             {
                 headers:{
                     "Content-Type":"application/json",
@@ -40,7 +40,7 @@ async function getValue(){
 
 async function fetchSlotDetails(){
     try{
-        const response = await axios.get("https://delightful-bull-sweatsuit.cyclic.app/booking/doctor-slot-details",{
+        const response = await axios.get("https://online-doctor-booking-app.onrender.com/booking/doctor-slot-details",{
             headers:{
                 "Content-Type":"application/json",
                 'Authorization': `${access_token}`
