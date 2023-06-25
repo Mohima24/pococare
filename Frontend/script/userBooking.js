@@ -1,12 +1,18 @@
 const access_token = localStorage.getItem('access_token');
 const container = document.getElementById('container');
 const userDetails = JSON.parse(localStorage.getItem('userData'))
+const nav = document.querySelector('nav')
 if(userDetails.role=="Doctor" && access_token){
-
+    nav.innerHTML= `
+        <a href="signin.html">Sign-In</a>
+        <a href="doctordashboard.html">My Dashboard</a>
+    `
     bookingDatadoctor()
 
 }else if(userDetails.role=="Patient" && access_token){
-
+    nav.innerHTML= `
+    <a href="signin.html">Sign-In</a>
+    <a href="index.html">MY Dashboard</a>`
     bookingData()
 
 }else{
@@ -84,7 +90,9 @@ function renderfun(data){
 
 function clientrenderfun(data){
 
-    container.innerHTML=`${data.map((el)=>{
+    container.innerHTML=`
+    ${
+    data.map((el)=>{
         const abc = new Date(el.slotTimming)
         const date = abc.getDate()
         const year = abc.getFullYear()
@@ -94,8 +102,11 @@ function clientrenderfun(data){
             <img src=Image/doctorpng.png>
             <h6>Patient name: ${el.userInfo.firstName} ${el.userInfo.lastName}</h6>
             <p>Time:${time} ${date}-${year}-${month}</p>
-            <button data-id=${el._id}>Do Live video Call</button>`
-    }).join("")}</div>`
+            <button data-id=${el._id}>Do Live video Call</button>
+            </div>`
+    }).join("")}`
+
+
     const bookingButton = document.querySelectorAll('button');
     for(let i=0;i<bookingButton.length;i++){
         bookingButton[i].addEventListener('click',(e)=>{

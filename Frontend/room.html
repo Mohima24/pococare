@@ -15,6 +15,24 @@
         width: 100%;
         height: auto;
       }
+      h1{
+        text-align: center;
+      }
+      .buttondiv{
+        width: 30%;
+        margin: auto;
+      }
+      button{
+        padding: 7px 10px;
+        background-color: rgb(57, 47, 47);
+        border: none;
+        color: white;
+        border-radius: none;
+        font-size: 500;
+      }
+      #EndVideo{
+        background-color: rgb(183, 13, 13);
+      }
     </style>
 
     <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"
@@ -23,7 +41,7 @@
 
     <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
     <script>
-    // const ROOM_ID = window.location.pathname.split('/').pop();
+
     </script>
   </head>
   <body>
@@ -32,20 +50,17 @@
     </div>
 
     <div id="video-grid"></div>
-    <button id="start">Camera On</button>
-    <button id="off">Camera Off</button>
-
-    <div id="endButtonDiv">
-        <button id="EndVideo">END VIDEO</button>
+    <div class="buttondiv">
+      <button id="start">Camera On</button>
+      <button id="off">Camera Off</button>
+      <button id="EndVideo">END VIDEO</button>
     </div>
   </body>
 </html>
 
 <script>
-
+const userDetails = JSON.parse(localStorage.getItem('userData'))
 const currentUrl = window.location.href;
-// https://online-doctor-booking-app.onrender.com/
-// "",{transports:["websocket"]}
 const url = new URL(currentUrl);
 const searchParams = new URLSearchParams(url.search);
 const ROOM_ID = searchParams.get('roomId');
@@ -121,6 +136,14 @@ function addVideoStream(video, stream) {
   })
   videoGrid.append(video)
 }
-
+const endVideo = document.getElementById('EndVideo');
+endVideo.addEventListener('click',()=>{
+  if(userDetails.role=="Doctor"){
+    window.location.assign('doctordashboard.html')
+    
+  }else if(userDetails.role=="Patient"){
+    window.location.assign('index.html')
+  }
+})
 </script>
 

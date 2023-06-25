@@ -6,9 +6,21 @@
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        h1{
+            text-align: center;
+            font-size: 2rem;
+            margin: 2rem 0;
+        }
         #container{
             width: 90%;
             margin: auto;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
         }
         #container>div{
             width: 20%;
@@ -19,10 +31,26 @@
         #container>div>img{
             width: 50%;
         }
+        nav{
+            padding: 1rem 0;
+            background-color: #7da8ff;
+            font-size:1.1rem;
+            text-align: center;
+        }
+        nav a{
+            color: white;
+            margin: 0 2rem;
+        }
     </style>
 </head>
 <body>
+    <nav>
+    </nav>
+    <div>
+        <h1>MEETINGS DETAILS<h1></h1>
+    </div>
     <div id="container">
+        
     </div>
 </body>
 </html>

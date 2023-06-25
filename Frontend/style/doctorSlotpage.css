@@ -14,6 +14,7 @@ nav{
 }
 nav a{
     color: white;
+    margin:0 2rem;
 }
 .container{
     width: 90%;
