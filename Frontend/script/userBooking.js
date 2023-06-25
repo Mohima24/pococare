@@ -76,7 +76,8 @@ function renderfun(data){
             <h6>Doctor name: ${el.doctorInfo.name}</h6>
             <h6>Specialist: ${el.doctorInfo.specialization}</h6>
             <p>Time:${time} ${date}-${year}-${month}</p>
-            <button data-id=${el._id}>Do Live video Call</button>`
+            <button data-id=${el._id}>Do Live video Call</button>
+            </div>`
 
     }).join("")}</div>`
     const bookingButton = document.querySelectorAll('button');
