@@ -123,7 +123,6 @@ exports.getavailableslot = async(req,res)=>{
               }
             }
           ])
-          res.send(availableSlots)
         if(availableSlots){
             return res.send({
                 status:"OK",
