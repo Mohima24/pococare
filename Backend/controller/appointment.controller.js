@@ -78,11 +78,12 @@ exports.bookingoute = async(req,res)=>{
             {
                 "timings.$": 1
             }
-        ).select("-timings")
+        )
         if(!doctorInfo){
             return res.status(404).send({"status":"FAILED",message:"Sorry Slot has booked"})
         }
-        sendEmailForBookingConfirmation({userInfo,userId:userID,doctorId,doctorInfo,slotTimming},res)
+        const dinfo = await DoctorModel.findOne({_id:doctorId}).select("-timings")
+        sendEmailForBookingConfirmation({userInfo,userId:userID,doctorId,dinfo,slotTimming},res)
     }
     catch(err){
         console.log(err)
@@ -140,12 +141,11 @@ exports.getavailableslot = async(req,res)=>{
 }
 
 
-async function sendEmailForBookingConfirmation({userInfo,userId:userID,doctorId,doctorInfo,slotTimming},res){
+async function sendEmailForBookingConfirmation({userInfo,userId:userID,doctorId,dinfo,slotTimming},res){
 
     const email = userInfo.email
     try{
-        delete doctorInfo.timings;
-        const payload = new AppointmentModel({userId:userID,doctorId,userInfo,doctorInfo,slotTimming});
+        const payload = new AppointmentModel({userId:userID,doctorId,userInfo,doctorInfo:dinfo,slotTimming});
         const time = new Date(slotTimming);
         const formattedDatetime = time.toLocaleString(undefined, { hour: 'numeric', minute: 'numeric', hour12: true });
         const date = time.getDate();
@@ -161,17 +161,17 @@ async function sendEmailForBookingConfirmation({userInfo,userId:userID,doctorId,
             <p>Your booking has confirmed</p>
             <br>
             <p>Booking ID: ${payload._id}</p>
-            <p>Doctor Name: ${doctorInfo.name}</p>
+            <p>Doctor Name: ${dinfo.name}</p>
             <p>Booking Time: ${formattedDatetime} ${date}-${month}-${year}</p>
             `
         }
-
+        res.send(payload)
         await transporter.sendMail(mailoptions)
+
         await DoctorModel.findOneAndUpdate(
             { _id: doctorId, "timings.time": slotTimming },
             { $set: { "timings.$.status": true,"timings.$.clientDetails":userInfo } }
           );
-
         await payload.save()
         res.send({
         status:"OK",
@@ -186,4 +186,20 @@ async function sendEmailForBookingConfirmation({userInfo,userId:userID,doctorId,
         console.log("while sending mail")
         console.log(err)
     }
+}
+
+exports.getAppointDetailsforuser = async(req,res) =>{
+    const {userID} = req.body;
+    try{
+        const appointmentDetails = await AppointmentModel.find({userId:userID})
+        res.send({status:"OK",data:appointmentDetails})
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+exports.getAppointDetailsforDoctor = async(req,res) =>{
+    const {userID} = req.body;
+    const appointmentDetails = await AppointmentModel.find({doctorId:userID})
+    res.send({status:"OK",data:appointmentDetails})
 }

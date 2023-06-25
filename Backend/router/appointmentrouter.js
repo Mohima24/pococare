@@ -13,6 +13,8 @@ AppontmentRouter.patch("/create-slot",authentication,authorized("Doctor"),appoin
 AppontmentRouter.post("/book-slot",authentication,authorized(["Patient","Doctor"]),appointmentController.bookingoute)
 AppontmentRouter.get("/doctor-slot-details",authentication,authorized("Doctor"),appointmentController.getlotsDetailsforDoctor)
 AppontmentRouter.get("/available-slot/:doctorId",appointmentController.getavailableslot)
+AppontmentRouter.get("/getUserAppointment",authentication,appointmentController.getAppointDetailsforuser)
+AppontmentRouter.get("/getDoctorAppointment",authentication,appointmentController.getAppointDetailsforDoctor)
 
 module.exports={
     AppontmentRouter
