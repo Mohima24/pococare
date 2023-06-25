@@ -200,6 +200,7 @@ exports.getAppointDetailsforuser = async(req,res) =>{
 }
 exports.getAppointDetailsforDoctor = async(req,res) =>{
     const {userID} = req.body;
-    const appointmentDetails = await AppointmentModel.find({doctorId:userID})
+    const doctor = await DoctorModel.findOne({userId:userID})
+    const appointmentDetails = await AppointmentModel.find({doctorId:doctor._id})
     res.send({status:"OK",data:appointmentDetails})
 }

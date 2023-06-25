@@ -43,6 +43,7 @@ async function bookingDatadoctor(){
             }
         })
         if(response.data.status=="OK"){
+            console.log(response.data.data)
             clientrenderfun(response.data.data)
 
         }else{
@@ -91,10 +92,9 @@ function clientrenderfun(data){
         const time = abc.toLocaleString(undefined, { hour: 'numeric', minute: 'numeric', hour12: true })
         return `<div>
             <img src=Image/doctorpng.png>
-            <h6>Patient name: ${el.userInfo.name}</h6>
+            <h6>Patient name: ${el.userInfo.firstName} ${el.userInfo.lastName}</h6>
             <p>Time:${time} ${date}-${year}-${month}</p>
             <button data-id=${el._id}>Do Live video Call</button>`
-
     }).join("")}</div>`
     const bookingButton = document.querySelectorAll('button');
     for(let i=0;i<bookingButton.length;i++){
