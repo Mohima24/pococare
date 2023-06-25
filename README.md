@@ -1,8 +1,7 @@
 # Doctor Booking Application
 
-
-- Deployed Webite = https://online-doctor-booking-app.onrender.com
-- Deployed Backend = https://6494e9dab8d76a19ce6043c2--brilliant-crepe-ae5b48.netlify.app/
+- Deployed Webite = https://doctoronlinebookingapp.netlify.app/
+- Deployed Backend = https://online-doctor-booking-app.onrender.com
 
 ---
 

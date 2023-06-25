@@ -70,6 +70,8 @@ function renderSlotDetails(data){
         const month= datetime.getMonth()
         const formattedDatetime = datetime.toLocaleString(undefined, { hour: 'numeric', minute: 'numeric', hour12: true })
 
+        const bookingButton = document.querySelectorAll('button')
+
         return`
             <div>
             <p>Slot: ${formattedDatetime} ${date}-${month}-${year}</p>
@@ -77,11 +79,15 @@ function renderSlotDetails(data){
                 <h6>${el.clientDetails.firstName} ${el.clientDetails.lastName}</h6>
                 <p>${el.clientDetails.email}</p>
                 <p>${el.clientDetails.mobile}</p>
+                <butoon>Do video call</button>
             `:`No Booking Yet`}
             </div>
         `
-    }).join("")}`:`<h2>No Slot</h2>`}`
 
+    }).join("")
+    
+}
+    `:`<h2>No Slot</h2>`}`
 }
 
 
