@@ -51,10 +51,10 @@ exports.createSlots = async(req,res)=>{
 
         }else{
 
-            // await DoctorModel.findOneAndUpdate(
-            //     {userId:userID},
-            //     {'$push':{"timings":{'time':slotTimming,status:false,clientDetails:null}}}
-            // )
+            await DoctorModel.findOneAndUpdate(
+                {userId:userID},
+                {'$push':{"timings":{'time':slotTimming,status:false,clientDetails:null}}}
+            )
             return res.send({status:"OK","message":"Updated successfully"});
         }
 
